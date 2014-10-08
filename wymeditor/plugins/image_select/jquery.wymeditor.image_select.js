@@ -1,3 +1,7 @@
+// Fugue icons by Yusuke Kamiyamane http://p.yusukekamiyamane.com/
+// and licensed under Creative Commons Attribution
+
+
 function ImageFromAttribute(attribute, options) {
 	this.attribute = attribute;
 	this.options = jQuery.extend({
@@ -38,6 +42,10 @@ function ImageSelect(options, wym) {
 		selectImage: String() +
 		'<li class="wym_tools_select_image">' +
 			'<a name="select_image" href="#" ' + 
+				'style="background-image: url(\'' + 
+					wym._options.basePath + 
+					'/plugins/image_select/image_select_icon.png\');' + 
+					'background-position: center center" ' +
 				'title="Select image">' +
 			'Select image</a>' +
 		'</li>',
