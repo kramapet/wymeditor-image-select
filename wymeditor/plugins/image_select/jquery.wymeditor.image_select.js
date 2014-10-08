@@ -13,7 +13,15 @@ function ImageFromAttribute(attribute, options) {
 }
 
 ImageFromAttribute.prototype.get_images = function (el) {
-	return el.getAttribute(this.attribute).split(' ');
+	var attr = el.getAttribute(this.attribute);
+
+	// if attribute is not specified or empty
+	if (attr === null || attr.replace(/\s*/g, '') === '') {
+		return [];
+	}
+
+	// delete additional whitespaces
+	return attr.replace(/\s+/g, ' ').split(' ');
 };
 
 ImageFromAttribute.prototype.get_normal_path = function (id) {
@@ -69,7 +77,14 @@ ImageSelect.prototype.bindEvents = function () {
 		wym = imageSelect._wym,
 		image_ids = imageSelect._options.images.get_images(wym._element.context);
 
-	jQuery(wym._box).find(imageSelect._options.selectImageSelector).click(function () {
+	jQuery(wym._box).find(imageSelect._options.selectImageSelector).click(function (e) {
+		e.preventDefault();
+
+		if (image_ids.length === 0) {
+			alert('There are no images to select');
+			return;
+		}
+
 		var dialogHtml = String() + 
 		'<body class="wym-dialog" data-index="' + WYMeditor.INDEX + '" onload="WYMeditor.INIT_DIALOG(\'' + WYMeditor.INDEX + '\');">' +
 			'<form name="wym_select_image_form">' +
