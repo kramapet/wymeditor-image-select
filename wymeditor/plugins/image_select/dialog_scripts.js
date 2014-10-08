@@ -22,6 +22,10 @@ jQuery('#wym_select_image_add').click(function (e) {
 	e.preventDefault();
 	var radio_list = document.forms.wym_select_image_form.img;
 
+	if (typeof radio_list.length !== 'number') {
+		radio_list = [radio_list];
+	}
+
 	for (var i = 0, l = radio_list.length; i < l; ++i) {
 		if (radio_list[i].checked) {
 			imageSelect.insert_image(radio_list[i].value);
