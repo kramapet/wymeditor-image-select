@@ -22,6 +22,9 @@ jQuery('#wym_select_image_add').click(function (e) {
 	e.preventDefault();
 	var radio_list = document.forms.wym_select_image_form.img;
 
+	// if there is only one image to select 
+	// radio_list is not RadioNodeList but HTMLInputElement
+	// so is necessary to wrap it.
 	if (typeof radio_list.length !== 'number') {
 		radio_list = [radio_list];
 	}
@@ -30,7 +33,7 @@ jQuery('#wym_select_image_add').click(function (e) {
 		if (radio_list[i].checked) {
 			imageSelect.insert_image(radio_list[i].value);
 			window.close();
-			break;
+			return;
 		}
 	}
 
